@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Clock</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="greeting" id="greeting">Hello</div>
+      <div class="controls">
+        <button id="themeBtn" class="icon-btn" title="Toggle theme">Theme</button>
+        <button id="fullscreenBtn" class="icon-btn" title="Fullscreen">Full</button>
+      </div>
+    </header>
+
+    <section class="clock-card">
+      <div class="time" id="time">--:--:--</div>
+      <div class="date" id="date"></div>
+      <div class="meta">
+        <span id="tz"></span>
+        <span id="weekProgress"></span>
+      </div>
+      <div class="alarm-banner" id="nextAlarm">No alarms set</div>
+    </section>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="alarms" role="tab">Alarms</button>
+      <button class="tab" data-tab="timer" role="tab">Timer</button>
+      <button class="tab" data-tab="stopwatch" role="tab">Stopwatch</button>
+      <button class="tab" data-tab="world" role="tab">World</button>
+    </nav>
+
+    <section class="panel" id="panel-alarms">
+      <form id="alarmForm" class="row">
+        <input type="time" id="alarmTime" required>
+        <input type="text" id="alarmLabel" placeholder="Label (optional)" maxlength="40">
+        <label class="days" title="Repeat days">
+          <span class="sr">Repeat</span>
+          <span class="day-picks" id="dayPicks"></span>
+        </label>
+        <button type="submit" class="primary">Add</button>
+      </form>
+      <ul class="list" id="alarmList"></ul>
+    </section>
+
+    <section class="panel hidden" id="panel-timer">
+      <div class="row">
+        <input type="number" id="timerMin" min="0" max="999" value="5" aria-label="Minutes">
+        <span>min</span>
+        <input type="number" id="timerSec" min="0" max="59" value="0" aria-label="Seconds">
+        <span>sec</span>
+      </div>
+      <div class="big" id="timerDisplay">00:05:00</div>
+      <div class="row center">
+        <button id="timerStart" class="primary">Start</button>
+        <button id="timerReset">Reset</button>
+      </div>
+    </section>
+
+    <section class="panel hidden" id="panel-stopwatch">
+      <div class="big" id="swDisplay">00:00.00</div>
+      <div class="row center">
+        <button id="swToggle" class="primary">Start</button>
+        <button id="swLap">Lap</button>
+        <button id="swReset">Reset</button>
+      </div>
+      <ol class="laps" id="laps"></ol>
+    </section>
+
+    <section class="panel hidden" id="panel-world">
+      <form id="worldForm" class="row">
+        <select id="worldZone" aria-label="Time zone"></select>
+        <button type="submit" class="primary">Add</button>
+      </form>
+      <ul class="list" id="worldList"></ul>
+    </section>
+  </main>
+
+  <div class="ring hidden" id="ring" role="alertdialog" aria-live="assertive">
+    <div class="ring-box">
+      <div class="ring-title" id="ringTitle">Alarm</div>
+      <div class="ring-time" id="ringTime"></div>
+      <div class="row center">
+        <button id="snooze">Snooze 5 min</button>
+        <button id="dismiss" class="primary">Dismiss</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
